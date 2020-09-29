@@ -16,6 +16,20 @@ que implementa a lógica básica do início do jogo:
 */
 public class Truco {
 
+    public static final int MAO = 3;
+
+    private Baralho baralhoTruco;
+    private Carta cartaVirada;
+    private Jogador primeiroJogador;
+    private Jogador segundoJogador;
+
+    public Truco(Baralho baralho, Carta cartaVirada, Jogador primeiroJogador, Jogador segundoJogador){
+        this.baralhoTruco = baralho;
+        this.cartaVirada = cartaVirada;
+        this.primeiroJogador = primeiroJogador;
+        this.segundoJogador = segundoJogador;
+    }
+
     private void imprimeMesa() {
         System.out.println("Apenas um placeholder para a impressão de mesa.");
         System.out.println("Você não precisa implementar esse método.");
@@ -26,5 +40,21 @@ public class Truco {
         distribuiMaos();
         inicializaManilha();
         imprimeMesa();
-    }    
+    }
+
+    private void inicializaManilha() {
+        cartaVirada = baralhoTruco.distribuir();
+    }
+
+    private void distribuiMaos() {
+        for(int cartas = 0; cartas < MAO; cartas++) {
+            primeiroJogador.recebeCarta(this.baralhoTruco.distribuir());
+            segundoJogador.recebeCarta(this.baralhoTruco.distribuir());
+        }
+    }
+
+    private void embaralhaCartas() {
+        baralhoTruco.embaralhar();
+
+    }
 }
